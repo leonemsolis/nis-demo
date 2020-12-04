@@ -5,20 +5,33 @@ using UnityEngine;
 public class PowderCanController : MonoBehaviour
 {
     private Renderer rend;
+    private bool selected = false;
 
     private void Start() {
         rend = GetComponent<Renderer>();
     }
 
     private void OnMouseDown() {
-        transform.position += Vector3.down * .03f;
+        selected = !selected;
+        if(selected) {
+            rend.material = MaterialManager.Instance.glassSelected;
+            GameEvents.Instance.PowderCanSelected(1, 2, 3);
+        } else {
+            rend.material = MaterialManager.Instance.glassHighlight;
+        }
     }
 
     private void OnMouseEnter() {
-        rend.material = MaterialManager.Instance.glassHighlight; 
+        if(!selected) {
+            rend.material = MaterialManager.Instance.glassHighlight; 
+        }
     }
 
     private void OnMouseExit() {
-        rend.material = MaterialManager.Instance.glass;
+        if(!selected) {
+            rend.material = MaterialManager.Instance.glass;
+        } else {
+            rend.material = MaterialManager.Instance.glassSelected;
+        }
     }
 }

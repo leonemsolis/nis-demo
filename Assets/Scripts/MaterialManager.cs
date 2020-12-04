@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class MaterialManager : MonoBehaviour
 {
-    public Material glass;
-    public Material glassHighlight;
+    public static MaterialManager Instance;
+    public Material glass, glassHighlight, glassSelected;
 
-    public static MaterialManager Instance{set; get;}
 
     private void Awake() {
-        if(Instance == null) {
+        if(!Instance) {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
             glass = Resources.Load<Material>("Glass");
             glassHighlight = Resources.Load<Material>("GlassHighlight");
+            glassSelected = Resources.Load<Material>("GlassSelected");
             print(glass);
             print(glassHighlight);
 
