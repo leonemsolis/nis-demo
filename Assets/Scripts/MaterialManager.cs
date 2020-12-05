@@ -5,7 +5,8 @@ using UnityEngine;
 public class MaterialManager : MonoBehaviour
 {
     public static MaterialManager Instance;
-    public Material glass, glassHighlight, glassSelected;
+    public Material glass, tube, bind, torch;
+    public Material highlight, selected;
 
 
     private void Awake() {
@@ -21,7 +22,10 @@ public class MaterialManager : MonoBehaviour
 
     private void LoadMaterials() {
         glass = Resources.Load<Material>("Glass");
-        glassHighlight = Resources.Load<Material>("GlassHighlight");
-        glassSelected = Resources.Load<Material>("GlassSelected");
+        tube = Resources.Load<Material>("Tube");
+        bind = Resources.Load<Material>("Bind");
+        torch = Resources.Load<Material>("Torch");
+        highlight = Resources.Load<Material>("Highlight");
+        selected = Resources.Load<Material>("Selected");
     }
 }

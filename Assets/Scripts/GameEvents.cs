@@ -43,4 +43,18 @@ public class GameEvents : MonoBehaviour
             onProbeFilled();
         }
     }
+
+    public event Action onProbeClosed;
+    public void ProbeClosed() {
+        if(onProbeClosed != null) {
+            onProbeClosed();
+        }
+    }
+
+    public event Action onProbeBinded;
+    public void ProbeBinded() {
+        if(onProbeBinded != null) {
+            onProbeBinded();
+        }
+    }
 }

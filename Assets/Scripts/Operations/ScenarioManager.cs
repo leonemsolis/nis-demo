@@ -4,7 +4,8 @@ using UnityEngine;
 using System;
 
 public enum OperationStatus {ACTIVE, COMPLETED, FAILED, AWAIT};
-public enum OperationType   {   GRAB_CONTAINER, 
+public enum OperationType   {   NONE,
+                                GRAB_CONTAINER, 
                                 FILL_PROBE, 
                                 CLOSE_PROBE, 
                                 PLACE_PROBE,
@@ -42,6 +43,12 @@ public class Operation
             case OperationType.FILL_PROBE:
                 GameEvents.Instance.onProbeFilled += OnCompleted;
                 break;
+            case OperationType.CLOSE_PROBE:
+                GameEvents.Instance.onProbeClosed += OnCompleted;
+                break;
+            case OperationType.PLACE_PROBE:
+                GameEvents.Instance.onProbeBinded += OnCompleted;
+                break;
         }
     }
 
@@ -52,6 +59,12 @@ public class Operation
                 break;
             case OperationType.FILL_PROBE:
                 GameEvents.Instance.onProbeFilled -= OnCompleted;
+                break;
+            case OperationType.CLOSE_PROBE:
+                GameEvents.Instance.onProbeClosed -= OnCompleted;
+                break;
+            case OperationType.PLACE_PROBE:
+                GameEvents.Instance.onProbeBinded -= OnCompleted;
                 break;
         }
     }
@@ -80,6 +93,7 @@ public class ScenarioManager : MonoBehaviour
     [SerializeField] private GameObject HintArrow;
 
     private OperationsController operationsController;
+    public OperationType currentOperationType;
 
     private void Awake() {
         if(!Instance) {
@@ -100,6 +114,7 @@ public class ScenarioManager : MonoBehaviour
         operations.Add(new Operation("Взять контейнер с KMnO4", OperationType.GRAB_CONTAINER));
         operations[0].status = OperationStatus.ACTIVE;
         MoveHintArrow(operations[0].type);
+        currentOperationType = operations[0].type;
 
         operations.Add(new Operation("Насыпать KMnO4 в пробирку", OperationType.FILL_PROBE));
         
@@ -126,7 +141,11 @@ public class ScenarioManager : MonoBehaviour
                 HintArrow.transform.position = FindObjectOfType<Probe>().transform.position + Vector3.up * .3f;
                 break;
             case OperationType.CLOSE_PROBE:
-                
+                HintArrow.transform.position = FindObjectOfType<TubeStart>().transform.position + Vector3.up * .2f;
+                break;
+            case OperationType.PLACE_PROBE:
+                print("P:ACE PROBE");
+                HintArrow.transform.position = FindObjectOfType<Bind>().transform.position + Vector3.up * .2f;
                 break;
         }
     }
@@ -135,9 +154,11 @@ public class ScenarioManager : MonoBehaviour
         print("OPERATION SUCCEED, "+op.name);
 
         bool allOpearationCompleted = true;
+        currentOperationType = OperationType.NONE;
         foreach(Operation o in operations) {
             if(o.status == OperationStatus.AWAIT) {
                 o.status = OperationStatus.ACTIVE;
+                currentOperationType = o.type;
                 MoveHintArrow(o.type);
                 allOpearationCompleted = false;
                 break;

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Probe : Bottle
+public class Probe : Interactable
 {
     private bool filled = false;
 
-    new protected void Start() {
-        base.Start();
-        SetType(BottleType.PROBE);
+    private void Start() {
+        Init(IntType.PROBE);
     }
 
     private void OnMouseEnter() {
@@ -25,7 +24,8 @@ public class Probe : Bottle
     }
 
     private void OnMouseDown() {
-        if(!filled) {
+        if(!filled && 
+            ScenarioManager.Instance.currentOperationType == OperationType.FILL_PROBE) {
             filled = true;
             transform.DOMove(transform.position + Vector3.up * .12f, .3f);
             transform.DORotate(Vector3.zero, .3f);
@@ -33,5 +33,15 @@ public class Probe : Bottle
             FindObjectOfType<Container>().Fill(transform.position);
             SetSelect();
         }
+    }
+
+    public void BindToStand(Vector3 position) {
+        SetDefault();
+        Sequence s = DOTween.Sequence();
+        s.Append(transform.DOMove(position + Vector3.forward * .05f, 1f));
+        s.Append(transform.DOLocalRotate(new Vector3(-90f, 0f, 0f), 1f));
+        s.AppendCallback(delegate {
+            GameEvents.Instance.ProbeBinded();
+        });
     }
 }
