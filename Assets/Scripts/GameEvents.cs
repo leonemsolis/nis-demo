@@ -30,16 +30,17 @@ public class GameEvents : MonoBehaviour
         }
     }
 
-    // public event Action<int, int, int> onPowderCanSelected;
     public event Action onContainerSelected;
-
     public void ContainerSelected() {
         if(onContainerSelected != null) {
             onContainerSelected();
         }
     }
 
-    public Action GetContainerSelectedAction() {
-        return onContainerSelected;
+    public event Action onProbeFilled;
+    public void ProbeFilled() {
+        if(onProbeFilled != null) {
+            onProbeFilled();
+        }
     }
 }
