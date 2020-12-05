@@ -1,14 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class TubeStart : Interactable
+public class TubeEnd : Interactable
 {
     private bool grabbed = false;
 
     private void Start() {
-        Init(IntType.TUBE_START);
+        Init(IntType.TUBE_END);
     }
 
     private void OnMouseEnter() {
@@ -25,18 +25,18 @@ public class TubeStart : Interactable
 
     private void OnMouseDown() {
         if(!grabbed &&
-            ScenarioManager.Instance.currentOperationType == OperationType.CLOSE_PROBE) {
+            ScenarioManager.Instance.currentOperationType == OperationType.PLACE_TUBE_TO_FLASK) {
             ScenarioManager.Instance.HideArrow();
-            FindObjectOfType<Probe>().SetDefault();
+            FindObjectOfType<Bind>().SetDefault();
             grabbed = true;
             SetSelect();
 
             Sequence s = DOTween.Sequence();
-            s.Append(transform.DOMove(FindObjectOfType<Probe>().transform.position + Vector3.up * .15f, .8f));
-            s.Append(transform.DOLocalRotate(new Vector3(-180f, 0f, 0f), .8f));
+            s.Append(transform.DOMove(GameObject.Find("Flask").transform.position + Vector3.up * .4f, .8f));
+            s.Append(transform.DOLocalRotate(new Vector3(0f, 0f, 0f), .8f));
             s.AppendCallback(delegate {
-                transform.SetParent(FindObjectOfType<Probe>().transform, true);
-                GameEvents.Instance.ProbeClosed();
+                transform.SetParent(GameObject.Find("Flask").transform, true);
+                GameEvents.Instance.FlaskClosed();
             });
         }
     }

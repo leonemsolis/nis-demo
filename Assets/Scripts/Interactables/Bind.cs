@@ -26,8 +26,10 @@ public class Bind : Interactable
     private void OnMouseDown() {
         if(!grabbed &&
             ScenarioManager.Instance.currentOperationType == OperationType.PLACE_PROBE) {
+            ScenarioManager.Instance.HideArrow();
             grabbed = true;
             SetSelect();
+            FindObjectOfType<TubeStart>().SetDefault();
             FindObjectOfType<Probe>().BindToStand(transform.position);
         }
     }

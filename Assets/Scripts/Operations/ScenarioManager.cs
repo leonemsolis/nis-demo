@@ -49,6 +49,9 @@ public class Operation
             case OperationType.PLACE_PROBE:
                 GameEvents.Instance.onProbeBinded += OnCompleted;
                 break;
+            case OperationType.PLACE_TUBE_TO_FLASK:
+                GameEvents.Instance.onFlaskClosed += OnCompleted;
+                break;
         }
     }
 
@@ -65,6 +68,9 @@ public class Operation
                 break;
             case OperationType.PLACE_PROBE:
                 GameEvents.Instance.onProbeBinded -= OnCompleted;
+                break;
+            case OperationType.PLACE_TUBE_TO_FLASK:
+                GameEvents.Instance.onFlaskClosed -= OnCompleted;
                 break;
         }
     }
@@ -133,6 +139,7 @@ public class ScenarioManager : MonoBehaviour
     }
 
     private void MoveHintArrow(OperationType type) {
+        HintArrow.SetActive(true);
         switch(type) {
             case OperationType.GRAB_CONTAINER:
                 HintArrow.transform.position = FindObjectOfType<Container>().transform.position + Vector3.up * .2f;
@@ -144,10 +151,16 @@ public class ScenarioManager : MonoBehaviour
                 HintArrow.transform.position = FindObjectOfType<TubeStart>().transform.position + Vector3.up * .2f;
                 break;
             case OperationType.PLACE_PROBE:
-                print("P:ACE PROBE");
                 HintArrow.transform.position = FindObjectOfType<Bind>().transform.position + Vector3.up * .2f;
                 break;
+            case OperationType.PLACE_TUBE_TO_FLASK:
+                HintArrow.transform.position = FindObjectOfType<TubeEnd>().transform.position + Vector3.up * .2f;
+                break;
         }
+    }
+
+    public void HideArrow() {
+        HintArrow.SetActive(false);
     }
 
     private void OnOperationCompleted(Operation op) {

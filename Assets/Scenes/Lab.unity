@@ -973,6 +973,7 @@ GameObject:
   - component: {fileID: 398167840}
   - component: {fileID: 398167839}
   - component: {fileID: 398167838}
+  - component: {fileID: 398167843}
   m_Layer: 0
   m_Name: TubeEnd
   m_TagString: Untagged
@@ -1005,7 +1006,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00914786, y: -0.7687278, z: 0.0124350935}
+  m_ConnectedAnchor: {x: 0.011932068, y: -0.7707725, z: 0.013814196}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -1066,7 +1067,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &398167841
@@ -1116,6 +1117,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398167836}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &398167843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398167836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9c40ec2e8a342fc89ec1b2ead672ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &429090142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1486,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &463489212
@@ -1827,7 +1840,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &605083447
@@ -4608,7 +4621,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.031021386, y: -0.75568205, z: 0.07080831}
+  m_ConnectedAnchor: {x: 0.03184436, y: -0.5608136, z: 0.07351935}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -4653,7 +4666,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1332586176
@@ -5234,7 +5247,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1452666411
@@ -5611,7 +5624,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1491214779
@@ -5768,7 +5781,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1494936510
@@ -6110,7 +6123,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.56
+  m_Height: 0.35
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1637913247

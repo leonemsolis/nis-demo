@@ -57,4 +57,11 @@ public class GameEvents : MonoBehaviour
             onProbeBinded();
         }
     }
+
+    public event Action onFlaskClosed;
+    public void FlaskClosed() {
+        if(onFlaskClosed != null) {
+            onFlaskClosed();
+        }
+    }
 }
