@@ -16,13 +16,30 @@ public class GameEvents : MonoBehaviour
         }
     }
 
-    public event Action<int, int, int> onPowderCanSelected;
-    // public event Action
-
-
-    public void PowderCanSelected(int a, int b, int c) {
-        if(onPowderCanSelected != null) {
-            onPowderCanSelected(a, b, c);
+    public event Action<Operation> onOperationCompleted;
+    public void OperationCompleted(Operation op) {
+        if(onOperationCompleted != null) {
+            onOperationCompleted(op);
         }
+    }
+
+    public event Action<Operation> onOperationFailed;
+    public void OperationFailed(Operation op) {
+        if(onOperationFailed != null) {
+            onOperationFailed(op);
+        }
+    }
+
+    // public event Action<int, int, int> onPowderCanSelected;
+    public event Action onContainerSelected;
+
+    public void ContainerSelected() {
+        if(onContainerSelected != null) {
+            onContainerSelected();
+        }
+    }
+
+    public Action GetContainerSelectedAction() {
+        return onContainerSelected;
     }
 }

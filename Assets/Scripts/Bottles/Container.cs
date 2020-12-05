@@ -12,15 +12,12 @@ public class Container : Bottle
     }
 
     private void OnMouseDown() {
+        selected = !selected;
         if(selected) {
-            SetDefault();
-        } else {
+            GameEvents.Instance.ContainerSelected();
             SetSelect();
+        } else {
+            SetDefault();
         }
-    }
-
-    public override void Action()
-    {
-        
     }
 }

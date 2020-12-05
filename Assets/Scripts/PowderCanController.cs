@@ -15,7 +15,7 @@ public class PowderCanController : MonoBehaviour
         selected = !selected;
         if(selected) {
             rend.material = MaterialManager.Instance.glassSelected;
-            GameEvents.Instance.PowderCanSelected(1, 2, 3);
+            // GameEvents.Instance.PowderCanSelected(1, 2, 3);
         } else {
             rend.material = MaterialManager.Instance.glassHighlight;
         }
