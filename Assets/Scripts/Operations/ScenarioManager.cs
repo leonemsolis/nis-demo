@@ -11,9 +11,7 @@ public enum OperationType   {   NONE,
                                 PLACE_PROBE,
                                 PLACE_TUBE_TO_FLASK,
                                 FIRE_UP_TORCH,
-                                WARM_UP_PROBE,
                                 HEAT_UP_POWDER,
-                                WAIT_FOR_HEAT,
                                 FIRE_UP_STICK,
                                 CHECK_OXYGEN 
                             };
@@ -52,6 +50,18 @@ public class Operation
             case OperationType.PLACE_TUBE_TO_FLASK:
                 GameEvents.Instance.onFlaskClosed += OnCompleted;
                 break;
+            case OperationType.FIRE_UP_TORCH:
+                GameEvents.Instance.onTorchFired += OnCompleted;
+                break;
+            case OperationType.HEAT_UP_POWDER:
+                GameEvents.Instance.onHeatPowder += OnCompleted;
+                break;
+            case OperationType.FIRE_UP_STICK:
+                GameEvents.Instance.onStickFired += OnCompleted;
+                break;
+            case OperationType.CHECK_OXYGEN:
+                GameEvents.Instance.onOxygenChecked += OnCompleted;
+                break;
         }
     }
 
@@ -71,6 +81,18 @@ public class Operation
                 break;
             case OperationType.PLACE_TUBE_TO_FLASK:
                 GameEvents.Instance.onFlaskClosed -= OnCompleted;
+                break;
+            case OperationType.FIRE_UP_TORCH:
+                GameEvents.Instance.onTorchFired -= OnCompleted;
+                break;
+            case OperationType.HEAT_UP_POWDER:
+                GameEvents.Instance.onHeatPowder -= OnCompleted;
+                break;
+            case OperationType.FIRE_UP_STICK:
+                GameEvents.Instance.onStickFired -= OnCompleted;
+                break;
+            case OperationType.CHECK_OXYGEN:
+                GameEvents.Instance.onOxygenChecked -= OnCompleted;
                 break;
         }
     }
@@ -128,9 +150,7 @@ public class ScenarioManager : MonoBehaviour
         operations.Add(new Operation("Закрепить пробирку горизонтально", OperationType.PLACE_PROBE));
         operations.Add(new Operation("Положить второй конец трубки в колбу", OperationType.PLACE_TUBE_TO_FLASK));
         operations.Add(new Operation("Зажечь горелку", OperationType.FIRE_UP_TORCH));
-        operations.Add(new Operation("Полностью разогреть пробирку", OperationType.WARM_UP_PROBE));
         operations.Add(new Operation("Нагреть KMnO4", OperationType.HEAT_UP_POWDER));
-        operations.Add(new Operation("Подождать пока KMnO4 разогреется", OperationType.WAIT_FOR_HEAT));
         operations.Add(new Operation("Поджечь палочку", OperationType.FIRE_UP_STICK));
         operations.Add(new Operation("Проверить кислород вспыхиванием палочки", OperationType.CHECK_OXYGEN));
 
@@ -155,6 +175,21 @@ public class ScenarioManager : MonoBehaviour
                 break;
             case OperationType.PLACE_TUBE_TO_FLASK:
                 HintArrow.transform.position = FindObjectOfType<TubeEnd>().transform.position + Vector3.up * .2f;
+                break;
+            case OperationType.FIRE_UP_TORCH:
+                HintArrow.transform.position = FindObjectOfType<Torch>().transform.position + Vector3.up * .2f;
+                break;
+            case OperationType.HEAT_UP_POWDER:
+                HideArrow();
+                break;
+            case OperationType.FIRE_UP_STICK:
+                HintArrow.transform.position = FindObjectOfType<Stick>().transform.position + Vector3.up * .2f;
+                break;
+            case OperationType.CHECK_OXYGEN:
+                HintArrow.transform.position = FindObjectOfType<Flask>().transform.position + Vector3.up * .2f;
+                break;
+            case OperationType.NONE:
+                HideArrow();
                 break;
         }
     }

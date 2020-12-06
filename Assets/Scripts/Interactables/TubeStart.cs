@@ -5,30 +5,16 @@ using DG.Tweening;
 
 public class TubeStart : Interactable
 {
-    private bool grabbed = false;
-
     private void Start() {
         Init(IntType.TUBE_START);
     }
 
-    private void OnMouseEnter() {
-        if(!grabbed) {
-            SetHighlight();
-        }
-    }
-
-    private void OnMouseExit() {
-        if(!grabbed) {
-            SetDefault();
-        }
-    }
-
     private void OnMouseDown() {
-        if(!grabbed &&
+        if(!activated &&
             ScenarioManager.Instance.currentOperationType == OperationType.CLOSE_PROBE) {
             ScenarioManager.Instance.HideArrow();
             FindObjectOfType<Probe>().SetDefault();
-            grabbed = true;
+            activated = true;
             SetSelect();
 
             Sequence s = DOTween.Sequence();

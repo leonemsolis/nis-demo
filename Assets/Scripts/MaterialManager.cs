@@ -5,7 +5,7 @@ using UnityEngine;
 public class MaterialManager : MonoBehaviour
 {
     public static MaterialManager Instance;
-    public Material glass, tube, bind, torch;
+    public Material glass, tube, bind, torch, stick;
     public Material highlight, selected;
 
 
@@ -25,6 +25,7 @@ public class MaterialManager : MonoBehaviour
         tube = Resources.Load<Material>("Tube");
         bind = Resources.Load<Material>("Bind");
         torch = Resources.Load<Material>("Torch");
+        stick = Resources.Load<Material>("Stick");
         highlight = Resources.Load<Material>("Highlight");
         selected = Resources.Load<Material>("Selected");
     }

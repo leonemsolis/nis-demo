@@ -5,29 +5,15 @@ using DG.Tweening;
 
 public class Probe : Interactable
 {
-    private bool filled = false;
-
     private void Start() {
         Init(IntType.PROBE);
     }
 
-    private void OnMouseEnter() {
-        if(!filled) {
-            SetHighlight();
-        }
-    }
-
-    private void OnMouseExit() {
-        if(!filled) {
-            SetDefault();
-        }
-    }
-
     private void OnMouseDown() {
-        if(!filled && 
+        if(!activated && 
             ScenarioManager.Instance.currentOperationType == OperationType.FILL_PROBE) {
             ScenarioManager.Instance.HideArrow();
-            filled = true;
+            activated = true;
             transform.DOMove(transform.position + Vector3.up * .12f, .3f);
             transform.DORotate(Vector3.zero, .3f);
             
@@ -38,11 +24,15 @@ public class Probe : Interactable
 
     public void BindToStand(Vector3 position) {
         SetDefault();
+        FindObjectOfType<ProgressBar>().Set(13f);
         Sequence s = DOTween.Sequence();
+        // s.Append(transform.DOLocalRotate(new Vector3(-90f, 0f, 0f), 4f));
+        // s.Append(transform.DOMove(position + Vector3.forward * .05f, 9f));
         s.Append(transform.DOLocalRotate(new Vector3(-90f, 0f, 0f), 1f));
         s.Append(transform.DOMove(position + Vector3.forward * .05f, 1f));
         s.AppendCallback(delegate {
             GameEvents.Instance.ProbeBinded();
+            FindObjectOfType<Bind>().SetDefault();
         });
     }
 }

@@ -64,4 +64,32 @@ public class GameEvents : MonoBehaviour
             onFlaskClosed();
         }
     }
+
+    public event Action onTorchFired;
+    public void TorchFired() {
+        if(onTorchFired != null) {
+            onTorchFired();
+        }
+    }
+
+    public event Action onHeatPowder;
+    public void HeatPowder() {
+        if(onHeatPowder != null) {
+            onHeatPowder();
+        }
+    }
+
+    public event Action onStickFired;
+    public void StickFired() {
+        if(onStickFired != null) {
+            onStickFired();
+        }
+    }
+
+    public event Action onOxygenChecked;
+    public void OxygenChecked() {
+        if(onOxygenChecked != null) {
+            onOxygenChecked();
+        }
+    }
 }

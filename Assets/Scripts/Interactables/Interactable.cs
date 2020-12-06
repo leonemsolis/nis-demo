@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum IntType {CONTAINER, PROBE, FLASK, TUBE_START, TUBE_END, BIND, TORCH};
+public enum IntType {CONTAINER, PROBE, FLASK, TUBE_START, TUBE_END, BIND, TORCH, STICK};
 public enum IntState {DEFAULT, HIGHLIGHT, SELECT};
 
 public class Interactable : MonoBehaviour
 {
-    protected IntType type;
     protected IntState state;
     protected new Renderer renderer;
     protected Material defaultMaterial;
+    protected bool activated = false;
 
     protected void Init(IntType type) {
         renderer = GetComponent<Renderer>();
-        this.type = type;
         // Set default material
         switch(type) {
             case IntType.CONTAINER:
@@ -32,11 +31,22 @@ public class Interactable : MonoBehaviour
             case IntType.TORCH:
                 defaultMaterial = MaterialManager.Instance.torch;
                 break;
+            case IntType.STICK:
+                defaultMaterial = MaterialManager.Instance.stick;
+                break;
         }   
     }
 
-    protected void SetType(IntType type) {
-        this.type = type;
+    protected void OnMouseEnter() {
+        if(!activated) {
+            SetHighlight();
+        }
+    }
+
+    protected void OnMouseExit() {
+        if(!activated) {
+            SetDefault();
+        }
     }
     
     public void SetDefault() {
