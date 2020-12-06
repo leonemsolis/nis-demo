@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public enum OperationStatus {ACTIVE, COMPLETED, FAILED, AWAIT};
 public enum OperationType   {   NONE,
@@ -158,6 +159,14 @@ public class ScenarioManager : MonoBehaviour
         operationsController.InitializeList(operations);
     }
 
+    public void Restart() {
+        SceneManager.LoadScene("Lab");
+    }
+
+    public void ExitApplication() {
+        Application.Quit();
+    }
+
     private void MoveHintArrow(OperationType type) {
         HintArrow.SetActive(true);
         switch(type) {
@@ -216,8 +225,20 @@ public class ScenarioManager : MonoBehaviour
         operationsController.UpdateList(operations);
 
         if(allOpearationCompleted) {
-            print("VICTORY!");
+            StartCoroutine(ShowOverlay());
         }
+    }
+
+    public IEnumerator ShowOverlay() {
+        yield return new WaitForSeconds(3f);
+        float alpha = 0f;
+        CanvasGroup group = FindObjectOfType<CanvasGroup>();
+        while(alpha < 1f) {
+            alpha += .1f;
+            group.alpha = alpha;
+            yield return new WaitForSeconds(.1f);
+        }
+        group.interactable = true;
     }
 
     private void OnOperationFailed(Operation op) {
