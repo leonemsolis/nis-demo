@@ -208,8 +208,8 @@ public class ScenarioManager : MonoBehaviour
     }
 
     private void OnOperationCompleted(Operation op) {
-        print("OPERATION SUCCEED, "+op.name);
-
+        // print("OPERATION SUCCEED, "+op.name);
+        
         bool allOpearationCompleted = true;
         currentOperationType = OperationType.NONE;
         foreach(Operation o in operations) {
